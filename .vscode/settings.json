@@ -1,0 +1,14 @@
+{
+    "python.linting.pylintArgs": [
+        "--load-plugins=pylint_django",
+        "--disable=C0111",
+    ],
+    "python.pythonPath": "/home/jhon/Documents/projects/venv/kept_secret/bin/python",
+    "python.terminal.activateEnvInCurrentTerminal": true,
+    "workbench.colorCustomizations": {
+        "statusBar.background" : "#1f1f1f",
+        "statusBar.noFolderBackground" : "#1b1b1b",
+        "statusBar.debuggingBackground": "#263238"
+        },
+    "emmet.includeLanguages": {"django-html": "html"},
+}
