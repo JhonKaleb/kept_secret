@@ -4,7 +4,9 @@ from .views import (
     all_secrets,
     create_secret,
     hug,
-    comment_secret
+    comment_secret,
+    like_comment,
+    report_comment
     )
 
 app_name = 'secret'
@@ -16,4 +18,5 @@ urlpatterns = [
     path('<secret_id>/hug/', hug, name='hug'),
     path('<secret_id>/new_comment/', comment_secret, name='comment_secret'),
     path('<secret_id>/comment/<coment_id>/like', like_comment, name='like_comment'),
+    path('<secret_id>/comment/<coment_id>/report', report_comment, name='report_comment'),
 ]

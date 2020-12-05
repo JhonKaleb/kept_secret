@@ -2,7 +2,7 @@ from rest_framework import viewsets, status
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
 from .serializers import SecretSerializer, SecretHeaderSerializer, CommentSerializer
-from .models import Secret
+from .models import Secret, Comment
 
 #class SecretViewSet(viewsets.ModelViewSet):
 #     queryset = Secret.objects.all()
@@ -34,7 +34,6 @@ def hug(request, secret_id):
     secret.save()
     return Response(status=status.HTTP_204_NO_CONTENT)
 
-
 @api_view(['POST'])
 def create_secret(request):
     serializer = SecretSerializer(data=request.data)
@@ -56,5 +55,22 @@ def comment_secret(request, secret_id):
         return Response(serializer.data, status=status.HTTP_201_CREATED)
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
+@api_view(['PATCH'])
+def like_comment(request, secret_id, coment_id):
+    try:
+        comment = Comment.objects.get(id=coment_id)
+    except Comment.DoesNotExist:
+        return Response(status=status.HTTP_404_NOT_FOUND)
+    comment.thanks += 1
+    comment.save()
+    return Response(status=status.HTTP_204_NO_CONTENT)
 
-#def like_comment(request):
+@api_view(['PATCH'])
+def report_comment(request, secret_id, coment_id):
+    try:
+        comment = Comment.objects.get(id=coment_id)
+    except Comment.DoesNotExist:
+        return Response(status=status.HTTP_404_NOT_FOUND)
+    comment.reports += 1
+    comment.save()
+    return Response(status=status.HTTP_204_NO_CONTENT)
