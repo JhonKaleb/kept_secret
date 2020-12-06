@@ -11,7 +11,7 @@ from .models import Secret, Comment
 
 @api_view(['GET'])
 def all_secrets(request):
-    secrets = Secret.objects.all().values_list()
+    secrets = Secret.objects.all().values()
     return Response(secrets)
 
 @api_view(['GET'])
